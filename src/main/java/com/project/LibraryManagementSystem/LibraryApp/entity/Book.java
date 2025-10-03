@@ -48,7 +48,8 @@ public class Book {
     private Timestamp createdAt;
 
 
+    @Builder.Default
     @Enumerated(EnumType.STRING)
-    private BookStatus bookStatus;
+    private BookStatus bookStatus = BookStatus.AVAILABLE ;
 
 }

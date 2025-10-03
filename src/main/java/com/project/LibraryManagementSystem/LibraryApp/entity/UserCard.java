@@ -20,13 +20,17 @@ public class UserCard {
     private Long id;
 
 
-    @OneToOne(mappedBy = "userCard")
+    @OneToOne(mappedBy = "userCard" ,fetch = FetchType.LAZY)
     @ToString.Exclude
     private User user;
 
 
-    @OneToMany(mappedBy = "userCard")
+    @OneToMany(mappedBy = "userCard", fetch = FetchType.LAZY)
     @ToString.Exclude
     private List<Book> books = new ArrayList<>();
+
+    private Long userId;
+
+    private String booksId = "{}";
 
 }

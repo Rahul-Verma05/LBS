@@ -9,7 +9,7 @@ import com.project.LibraryManagementSystem.LibraryApp.entity.User;
 import com.project.LibraryManagementSystem.LibraryApp.entity.UserCard;
 import com.project.LibraryManagementSystem.LibraryApp.enums.BookStatus;
 import com.project.LibraryManagementSystem.LibraryApp.repository.BookRepository;
-import com.project.LibraryManagementSystem.LibraryApp.repository.UserCardRespository;
+import com.project.LibraryManagementSystem.LibraryApp.repository.UserCardRepository;
 import com.project.LibraryManagementSystem.LibraryApp.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -22,7 +22,7 @@ import java.util.List;
 public class UserService {
 
     private final UserRepository userRepository;
-    private final UserCardRespository userCardRespository;
+    private final UserCardRepository userCardRepository;
     private final BookRepository bookRepository;
 
 
@@ -57,6 +57,7 @@ public class UserService {
         user = userRepository.save(user);
 
         userCard.setUser(user);
+        userCard.setUserId(user.getId());
 
         return new UserDto(
                 user.getId(),
@@ -77,7 +78,7 @@ public class UserService {
         List<Book> books = userCard.getBooks();
 
         for(Book book : books) {
-            book.setBookStatus(BookStatus.Available);
+            book.setBookStatus(BookStatus.AVAILABLE);
             book.setUserCard(null);
         }
 
@@ -85,6 +86,7 @@ public class UserService {
 
         return "User with ID : " + id + " is Deleted Successfully";
     }
+
 
 
 
